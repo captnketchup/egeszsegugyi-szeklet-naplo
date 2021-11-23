@@ -1,5 +1,5 @@
 # egeszsegugyi-szeklet-naplo
-Egészségügyi széklet napló
+Egészségügyi széklet napló\n
 A gasztroenterológiai cselekvéseink tabu téma a mai társadalomban, ellenben ha figyelmen
 kívül hagyjuk a (sokszor nyilvánvaló) jeleket, komoly egészségügyi problémákba ütközhetünk.
 A lényege az lenne, hogy követi a széklet rendszerességét és ebből adódóan akár
