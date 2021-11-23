@@ -1,58 +1,44 @@
 package hu.verymucharealcompany.eszn
 
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.androidplot.xy.*
-import hu.verymucharealcompany.eszn.databinding.ActivityGraphBinding
-import java.text.FieldPosition
-import java.text.Format
-import java.text.ParsePosition
+import hu.verymucharealcompany.eszn.data.DiaryListDatabase
+import io.data2viz.charts.chart.Chart
+import io.data2viz.charts.chart.chart
+import io.data2viz.viz.VizContainerView
 import java.util.*
 
 class GraphActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityGraphBinding
+    private lateinit var database: DiaryListDatabase
 
-    override fun onCreate(savedInstance: Bundle?) {
-        super.onCreate(savedInstance)
-        binding = ActivityGraphBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        binding = ActivityGraphBinding.inflate(layoutInflater)
+        setContentView(MyChart(this))
 
-        val domainLabels = arrayOf<Number>(1,2,3,6,7,8,9,10,13,14);
-        val series1Number = arrayOf<Number>(1,4,8,12,16,32,26,29,10,13);
-        val series2Number = arrayOf<Number>(2,8,4,7,32,16,64,12,7,10);
-
-        val series1 : XYSeries = SimpleXYSeries(Arrays.asList(* series1Number),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY
-            ,"Series 1");
-        val series2 : XYSeries = SimpleXYSeries(Arrays.asList(* series2Number),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY
-            ,"Series 1");
-
-        val series1Format = LineAndPointFormatter(Color.BLUE,Color.BLACK,null,null)
-        val series2Format = LineAndPointFormatter(Color.DKGRAY,Color.LTGRAY,null,null)
-
-        series1Format.setInterpolationParams(CatmullRomInterpolator.Params(10,
-            CatmullRomInterpolator.Type.Centripetal))
-        series2Format.setInterpolationParams(CatmullRomInterpolator.Params(10,
-            CatmullRomInterpolator.Type.Centripetal))
-
-        binding.plot.addSeries(series1,series1Format)
-        binding.plot.addSeries(series2,series2Format)
-
-        binding.plot.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format = object : Format() {
-            override fun format(
-                obj: Any?,
-                toAppendTo: StringBuffer,
-                pos: FieldPosition
-            ): StringBuffer {
-                val i = Math.round((obj as Number).toFloat())
-                return toAppendTo.append(domainLabels[i])
-            }
-
-            override fun parseObject(source: String?, pos: ParsePosition): Any? {
-                return null
-            }
-
-        }
-        PanZoom.attach(binding.plot)
+        database = DiaryListDatabase.getDatabase(applicationContext)
     }
+
+
+    fun getData(): List<WeeklyData> {
+        val weeklyValues: MutableList<WeeklyData> = arrayListOf()
+        var currentDate = Date().time - 7*24*60*60*1000
+        repeat(7){
+            weeklyValues.add(
+                WeeklyData(Date(currentDate).toString(), database.diaryItemDao().getCountOfDay(Date(currentDate))))
+            currentDate + 24*60*60*1000
+        }
+        return weeklyValues
+    }
+
 }
+
+class MyChart(context: Context) : VizContainerView(context){
+//    private val chart: Chart<WeeklyData> = chart(listOfWeek){
+//
+//    }
+}
+
+data class WeeklyData(val day: String, val amount: Int)
+

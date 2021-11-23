@@ -8,6 +8,9 @@ interface DiaryItemDao {
     @Query("SELECT * FROM diaryitem")
     fun getAll(): List<DiaryItem>
 
+    @Query("SELECT COUNT(*) FROM diaryitem WHERE date = :targetDate")
+    fun getCountOfDay(targetDate: Date): Int
+
     @Insert
     fun insert(shoppingItems: DiaryItem): Long
 
