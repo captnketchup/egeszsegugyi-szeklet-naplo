@@ -4,14 +4,12 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.DialogFragment
 import hu.verymucharealcompany.eszn.R
 import hu.verymucharealcompany.eszn.data.DiaryItem
 import hu.verymucharealcompany.eszn.databinding.DialogNewDiaryItemBinding
-import kotlin.math.roundToLong
 
 class NewDiaryItemDialogFragment : DialogFragment() {
     interface NewDiaryItemDialogListener {

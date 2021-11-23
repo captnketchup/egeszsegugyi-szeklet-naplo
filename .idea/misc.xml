@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/layout/activity_graph.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/layout/activity_menu.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/layout/dialog_new_diary_item.xml" value="0.33" />
         <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/layout/item_diary_list.xml" value="0.33" />
+        <entry key="..\:/Users/Dani/AndroidStudioProjects/ESZN/app/src/main/res/menu/menu_main.xml" value="0.18802083333333333" />
       </map>
     </option>
   </component>

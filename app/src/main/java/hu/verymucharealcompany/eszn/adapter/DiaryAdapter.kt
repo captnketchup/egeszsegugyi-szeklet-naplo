@@ -2,7 +2,6 @@ package hu.verymucharealcompany.eszn.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import hu.verymucharealcompany.eszn.data.DiaryItem
 import hu.verymucharealcompany.eszn.databinding.ItemDiaryListBinding

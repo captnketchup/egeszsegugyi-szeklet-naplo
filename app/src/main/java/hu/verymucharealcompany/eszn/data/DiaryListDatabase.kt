@@ -16,7 +16,7 @@ abstract class DiaryListDatabase : RoomDatabase() {
             return Room.databaseBuilder(
                 applicationContext,
                 DiaryListDatabase::class.java,
-                "shopping-list"
+                "diary-list"
             ).build();
         }
     }
