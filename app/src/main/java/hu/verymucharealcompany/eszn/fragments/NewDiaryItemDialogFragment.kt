@@ -46,7 +46,7 @@ class NewDiaryItemDialogFragment : DialogFragment() {
     private fun getDiaryItem() = DiaryItem(
         description = binding.etDescription.text.toString(),
         weight = getWeightDiff(),
-        date = binding.dpDate.year.toString() + "." + binding.dpDate.month.toString() + "." + binding.dpDate.dayOfMonth.toString()
+        date = binding.dpDate.year.toString() + "." + (binding.dpDate.month+1).toString() + "." + binding.dpDate.dayOfMonth.toString()  //for some reason binding.dpDate.month returns a
     )
 
     private fun getWeightDiff(): Double {
