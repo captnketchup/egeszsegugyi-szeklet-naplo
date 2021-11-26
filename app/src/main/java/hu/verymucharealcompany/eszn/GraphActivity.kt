@@ -1,17 +1,18 @@
 package hu.verymucharealcompany.eszn
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import hu.verymucharealcompany.eszn.data.DiaryListDatabase
-import io.data2viz.charts.chart.Chart
-import io.data2viz.charts.chart.chart
-import io.data2viz.charts.chart.discrete
-import io.data2viz.charts.chart.mark.area
-import io.data2viz.charts.chart.quantitative
-import io.data2viz.geom.Size
+import io.data2viz.charts.core.*
+import io.data2viz.charts.chart.*
+import io.data2viz.charts.chart.mark.*
+import io.data2viz.charts.viz.*
+import io.data2viz.geom.*
 import io.data2viz.viz.VizContainerView
+import io.data2viz.viz.VizContainer
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -20,9 +21,22 @@ class GraphActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        thread {
+//            val items = database.diaryItemDao().getAll()
+//        }
 //        binding = ActivityGraphBinding.inflate(layoutInflater)
+        runOnUiThread{
+
         database = DiaryListDatabase.getDatabase(applicationContext)
-        setContentView(MyChart(this, getData()))
+        val asdf = getData()
+        val chartView = MyChart(this, getData())
+
+
+
+        setContentView(chartView)
+        }
+
+
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -30,7 +44,6 @@ class GraphActivity : AppCompatActivity() {
         )
 
     }
-
 
     fun getData(): List<WeeklyData> {
         val weeklyValues: MutableList<WeeklyData> = arrayListOf()
@@ -40,11 +53,13 @@ class GraphActivity : AppCompatActivity() {
 
             repeat(7) {
                 val currYear = currCalendar.get(Calendar.YEAR).toString()
-                val currMonth = (currCalendar.get(Calendar.MONTH)+1).toString()
+                val currMonth =
+                    (currCalendar.get(Calendar.MONTH) + 1).toString()     //for some reason the month is always one less than it's supposed to be
                 val currDay = currCalendar.get(Calendar.DAY_OF_MONTH).toString()
 
 
-                weeklyValues.add(WeeklyData(
+                weeklyValues.add(
+                    WeeklyData(
                         "$currYear.$currMonth.$currDay",
                         database.diaryItemDao().getCountOfDay("$currYear.$currMonth.$currDay")
                     )
@@ -53,14 +68,47 @@ class GraphActivity : AppCompatActivity() {
                 currCalendar.time = Date(currentDate)
             }
         }
+
+        for (i in 0 until weeklyValues.size) {
+            for (j in i+1 until weeklyValues.size) {
+                val iVal = weeklyValues[i].getDate()
+                val jVal = weeklyValues[j].getDate()
+                if(weeklyValues[j].getDate() < weeklyValues[i].getDate()){
+                    val temp = weeklyValues[i]
+                    weeklyValues[i] = weeklyValues[j]
+                    weeklyValues[j] = temp
+                }
+            }
+        }
+
+
         return weeklyValues
     }
 
 
 }
 
+
 class MyChart(context: Context, weekData: List<WeeklyData>) : VizContainerView(context) {
-    private val chart: Chart<WeeklyData> = chart(weekData) {
+    private fun organizeData(weekData: List<WeeklyData>): List<WeeklyData>{
+        val weeklyValues: MutableList<WeeklyData> = weekData.toMutableList()
+        for (i in 0 until weeklyValues.size) {
+            for (j in i+1 until weeklyValues.size) {
+                val iVal = weeklyValues[i].getDate()
+                val jVal = weeklyValues[j].getDate()
+                if(weeklyValues[j].getDate() < weeklyValues[i].getDate()){
+                    val temp = weeklyValues[i]
+                    weeklyValues[i] = weeklyValues[j]
+                    weeklyValues[j] = temp
+                }
+            }
+        }
+
+        return weeklyValues
+    }
+
+    private val chart: Chart<WeeklyData> = chart(organizeData(weekData)) {
+        val asdfasdfasd = organizeData(weekData)
         size = Size(vizSize, vizSize)
         title = "Past week"
 
@@ -79,6 +127,13 @@ class MyChart(context: Context, weekData: List<WeeklyData>) : VizContainerView(c
     }
 }
 
-data class WeeklyData(val day: String, val amount: Int)
+data class WeeklyData(val day: String, val amount: Int) {
+    fun getDate(): Long {
+        val dateStr = this.day.split(".")
+        val dateConverted = Calendar.getInstance()
+        dateConverted.set(dateStr[0].toInt(), dateStr[1].toInt()-1, dateStr[2].toInt())
+        return dateConverted.timeInMillis
+    }
+}
 
 const val vizSize = 500.0
