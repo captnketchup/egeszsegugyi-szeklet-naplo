@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import hu.verymucharealcompany.eszn.R
 import hu.verymucharealcompany.eszn.data.DiaryItem
 import hu.verymucharealcompany.eszn.databinding.DialogNewDiaryItemBinding
+import java.util.*
 
 class NewDiaryItemDialogFragment : DialogFragment() {
     interface NewDiaryItemDialogListener {
@@ -43,11 +44,20 @@ class NewDiaryItemDialogFragment : DialogFragment() {
 
     private fun isValid() = binding.dpDate.isNotEmpty()
 
-    private fun getDiaryItem() = DiaryItem(
-        description = binding.etDescription.text.toString(),
-        weight = getWeightDiff(),
-        date = binding.dpDate.year.toString() + "." + (binding.dpDate.month+1).toString() + "." + binding.dpDate.dayOfMonth.toString()  //for some reason binding.dpDate.month returns a
-    )
+    private fun getDiaryItem(): DiaryItem {
+        val cal = Calendar.getInstance()
+        cal.set(binding.dpDate.year,
+            binding.dpDate.month,
+            binding.dpDate.dayOfMonth, 0, 0, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        val asdf = DiaryItem(
+            description = binding.etDescription.text.toString(),
+            weight = getWeightDiff(),
+//        date = binding.dpDate.year.toString() + "." + (binding.dpDate.month+1).toString() + "." + binding.dpDate.dayOfMonth.toString()  //for some reason binding.dpDate.month returns a
+            date = cal.timeInMillis
+        )
+        return  asdf
+    }
 
     private fun getWeightDiff(): Double {
         val weightBefore = binding.etWeightBef.text.toString().toDoubleOrNull()

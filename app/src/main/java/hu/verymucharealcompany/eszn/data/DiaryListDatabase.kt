@@ -17,7 +17,7 @@ abstract class DiaryListDatabase : RoomDatabase() {
                 applicationContext,
                 DiaryListDatabase::class.java,
                 "diary-list"
-            ).build();
+            ).allowMainThreadQueries().build();
         }
     }
 }

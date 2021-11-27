@@ -11,7 +11,7 @@ data class DiaryItem(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) var id: Long? = null,
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "weight") var weight: Double,
-    @ColumnInfo(name = "date") var date: String
+    @ColumnInfo(name = "date") var date: Long
 )
 
 

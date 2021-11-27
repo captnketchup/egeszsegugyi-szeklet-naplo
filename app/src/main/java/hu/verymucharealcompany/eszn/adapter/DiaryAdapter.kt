@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import hu.verymucharealcompany.eszn.data.DiaryItem
 import hu.verymucharealcompany.eszn.databinding.ItemDiaryListBinding
+import java.sql.Timestamp
+import java.util.*
 
 class DiaryAdapter(private val listener: DiaryItemClickListener) :
     RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder>() {
@@ -19,7 +21,9 @@ class DiaryAdapter(private val listener: DiaryItemClickListener) :
 
         holder.binding.tvDescription.text = diaryItem.description
         holder.binding.tvWeight.text = "${diaryItem.weight} Kg"
-        holder.binding.tvDate.text = diaryItem.date
+        val cal =  Calendar.getInstance()
+        cal.time = Date(diaryItem.date)
+        holder.binding.tvDate.text = "${cal.get(Calendar.YEAR)}.${cal.get(Calendar.MONTH) + 1}.${cal.get(Calendar.DAY_OF_MONTH)}"
 
         holder.binding.ibRemove.setOnClickListener {
             listener.onItemRemoved(diaryItem)
