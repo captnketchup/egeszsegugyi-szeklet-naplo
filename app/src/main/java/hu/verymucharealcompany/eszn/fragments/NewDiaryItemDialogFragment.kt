@@ -30,7 +30,7 @@ class NewDiaryItemDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogNewDiaryItemBinding.inflate(LayoutInflater.from(context))
 
-        return AlertDialog.Builder(requireContext())
+        return AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
             .setTitle(R.string.new_diary_item)
             .setView(binding.root)
             .setPositiveButton(R.string.button_ok) { dialogInterface, i ->

@@ -14,4 +14,11 @@
     <string name="button_stats">Statistics</string>
     <string name="button_about">About</string>
     <string name="plotName">Number of Occurances</string>
+    <string name="version_1_0">version 1.0</string>
+    <string name="created_by_k_v_ri_d_niel">Created By Kővári Dániel</string>
+    <string name="email">kovarid99@gmail.com</string>
+    <string name="description_text">A gasztroenterológiai cselekvést követő alkalmazás. \n
+        A "Records" gombra kattintva a felhasználó
+        felvehet újabb rekordokat, hogy nyomon tudja követni a cselekvéseit. Itt további részletes adatokat tud megadni ha szeretne.\n
+        A "Statistics" gombra kattintva a felhasználó láthatja az elmúlt 1 hétben lévő napi széklet ürítési szokásait. </string> />
 </resources>

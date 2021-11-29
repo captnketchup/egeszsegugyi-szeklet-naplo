@@ -21,10 +21,6 @@ class GraphActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        thread {
-//            val items = database.diaryItemDao().getAll()
-//        }
-//        binding = ActivityGraphBinding.inflate(layoutInflater)
         database = DiaryListDatabase.getDatabase(applicationContext)
 
         val data = getData()
@@ -45,7 +41,6 @@ class GraphActivity : AppCompatActivity() {
 
     fun getData(): List<WeeklyData> {
         val weeklyValues: MutableList<WeeklyData> = arrayListOf()
-//        var currentDate = Date().time - 7 * 24 * 60 * 60 * 1000
         var currCalendar = Calendar.getInstance()
         currCalendar.set(Calendar.HOUR, 0)
         currCalendar.set(Calendar.MINUTE, 0)

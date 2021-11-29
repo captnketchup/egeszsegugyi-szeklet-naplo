@@ -3,6 +3,7 @@ package hu.verymucharealcompany.eszn
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.verymucharealcompany.eszn.adapter.DiaryAdapter
 import hu.verymucharealcompany.eszn.data.DiaryItem
@@ -23,6 +24,7 @@ NewDiaryItemDialogFragment.NewDiaryItemDialogListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         database = DiaryListDatabase.getDatabase(applicationContext)
 

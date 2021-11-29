@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dip"
-        android:weightSum="7">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bee1e6"
+    android:orientation="vertical"
+    android:padding="24dip"
+    android:weightSum="6">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_gravity="center"
-            android:src="@drawable/doctordroid"
-            />
-
-        <Button
-            android:id="@+id/bRecords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="@string/button_records" />
-
-        <Button
-            android:id="@+id/bProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="@string/button_profile" />
-
-        <Button
-            android:id="@+id/bStats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="@string/button_stats" />
-    <Button
-        android:id="@+id/bAbout"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="3"
+        android:src="@drawable/doctordroid" />
+
+    <Button
+        android:id="@+id/bRecords"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/button_records" />
+
+    <Button
+        android:id="@+id/bStats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:text="@string/button_stats" />
+
+    <Button
+        android:id="@+id/bAbout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
         android:text="@string/button_about" />
-    </LinearLayout>
+</LinearLayout>
